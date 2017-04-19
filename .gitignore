@@ -1,0 +1,6 @@
+/project
+/target
+/desktop.ini
+/*.smt2
+/.idea
+*.iml
