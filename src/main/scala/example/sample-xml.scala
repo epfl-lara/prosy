@@ -1,4 +1,5 @@
 package example
+package xml
 
 abstract class Ls
 abstract class La

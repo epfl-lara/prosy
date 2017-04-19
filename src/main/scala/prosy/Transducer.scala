@@ -1,4 +1,4 @@
-package transducer
+package prosy
 
 import scala.util.Random
 

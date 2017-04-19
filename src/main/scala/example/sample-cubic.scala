@@ -1,4 +1,5 @@
-package examplecubic
+package example
+package cubic
 
 abstract class A
 abstract class B

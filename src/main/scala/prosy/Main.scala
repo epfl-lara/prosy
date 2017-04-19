@@ -1,4 +1,4 @@
-package transducer 
+package prosy 
 
 import Notations._
 import Transducer._

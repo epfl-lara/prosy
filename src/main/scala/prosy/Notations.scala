@@ -1,4 +1,4 @@
-package transducer
+package prosy
 
 import Transducer._
 import TestSet._

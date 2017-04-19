@@ -1,4 +1,5 @@
-package examplegrammar
+package example
+package grammar
 
 trait Symbol
 case class Terminal(s: String) extends Symbol

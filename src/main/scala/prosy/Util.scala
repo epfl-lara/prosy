@@ -1,4 +1,4 @@
-package transducer
+package prosy
 
 object Util {
 

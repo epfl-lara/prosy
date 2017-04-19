@@ -1,4 +1,4 @@
-package transducer
+package prosy
 
 object ParseScala {
   import Util._

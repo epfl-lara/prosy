@@ -1,4 +1,5 @@
-package paperexample
+package example
+package paper
 
 abstract class Char
 case class a() extends Char

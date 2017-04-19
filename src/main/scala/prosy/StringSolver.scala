@@ -1,4 +1,4 @@
-package transducer
+package prosy
 
 import scala.collection.mutable.ListBuffer
 import scala.annotation.tailrec
