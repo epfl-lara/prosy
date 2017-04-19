@@ -210,6 +210,10 @@ object AlgoInteraction {
               gatherKnowledge(prArray(v-1), Some(allpossibilitiesautomata))
             }
           } catch {
+		    case e: java.lang.ArrayIndexOutOfBoundsException =>
+			  println("Answer out of bounds.")
+              errors += 1
+              false
             case e: java.lang.NumberFormatException =>
               if (prArray.contains(line)) {
                 println("We understood your answer as the string \""+line+"\"")
