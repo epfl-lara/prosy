@@ -243,7 +243,7 @@ $testSetSize elements computed in test set:
   $questions questions asked.
     ${questions - implicitSuggestions - explicitSuggestions} regular questions
     $implicitSuggestions with an hint of the type [...]foo[...]
-    $explicitSuggestions with explicit suggestions${(if(errors == 0) "" else "\n" + errors.toString)}
+    $explicitSuggestions with explicit suggestions${(if(errors == 0) "" else "\n" + errors.toString + " wrong inputs corrected afterwards")}
 """)
     
     STW(knownAutomata)
