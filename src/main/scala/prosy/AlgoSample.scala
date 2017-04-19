@@ -3,7 +3,11 @@ package prosy
 import Notations._
 import Transducer._
 
-/** Algorithm 1 of the paper "Proactive Synthesis" */
+/** Algorithm 1 of the paper "Proactive Synthesis".
+    Creates a tree-to-string recursive function
+    consistent with the given sample of input/output example.
+    Requires z3 in the PATH to work properly.
+ */
 object AlgoSample {
 
 

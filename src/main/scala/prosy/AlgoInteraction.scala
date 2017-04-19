@@ -6,10 +6,10 @@ import Util._
 import Notations._
 import Main._
 
+/** Algorithm 3 of the paper "Proactive Synthesis". Run by Main.scala
+    Asks O(n) relevant questions out of the O(n^3) generated.
+*/
 object AlgoInteraction {
-
-  
-  
   def lcp(s1: String, s2: String): String = {
     def loop(i: Int): String = {
       if (i < s1.length && i < s2.length && s1(i) == s2(i))

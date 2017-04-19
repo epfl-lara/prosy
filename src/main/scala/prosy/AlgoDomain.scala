@@ -5,7 +5,10 @@ import TestSet._
 import Util._
 import Notations._
 
-/** Algorithm 2 of the paper "Proactive Synthesis" */
+/** Algorithm 2 of the paper "Proactive Synthesis"
+    Asks for the output of every element of the generated test set.
+    Asks O(n^3) questions, where n is the size of the grammar.
+ */
 object AlgoDomain {
 
 
