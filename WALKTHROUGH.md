@@ -61,9 +61,9 @@ NonTerminal(ConsChar(b,NilChar))  ? Nb  # This will fail, although it followed t
 NonTerminal(ConsChar(b,NilChar))  ? 2   # We give the correct output index
 Grammar(NonTerminal(NilChar),NilRule) ? N_{} is the start symbol # We first describe the start non-terminal, and the rules wills follow.
 ConsSymbol(Terminal(a),NilSymbol) ?  a  # WARNING: add one space before a. It is the concatenation of symbols in a rule.
-Rule(NonTerminal(NilChar),NilSymbol) ? N_ \longrightarrow         # No space after the arrow.
+Rule(NonTerminal(NilChar),NilSymbol) ? N_{} \longrightarrow         # No space after the arrow.
 ConsRule(Rule(NonTerminal(NilChar),NilSymbol),NilRule) ? \
-N_ \longrightarrow     # Note that we write \ and press enter to indicate a new line.
+N_{} \longrightarrow     # Note that we write \ and press enter to indicate a new line.
 Rule(NonTerminal(NilChar),ConsSymbol(Terminal(a),NilSymbol)) ? 10 # The way we want to print it does not appear in the list. Although we could input 0 and then write it ourselves, we can also write 10 to enumerate the remaining suggestions.
 Rule(NonTerminal(NilChar),ConsSymbol(Terminal(a),NilSymbol)) ? 7  # The answer appeared there. Note that if you enter 9 or 10, it will complain and restart the questions.
 Grammar(NonTerminal(NilChar),ConsRule(Rule(NonTerminal(NilChar),NilSymbol),NilRule)) ? 10
