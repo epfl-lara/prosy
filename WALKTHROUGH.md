@@ -15,6 +15,8 @@ How to use the artifact
 Prerequisites
 -------------
 
+If you downloaded the virtual machine, extract the content in `~/VirtualBox VMs` and then use VirtualBox to open the virtual machine. If you are downloading this repository from github :
+
 * Have git installed and on the path.
 * Have java 7 or 8
 * Have [SBT](http://www.scala-sbt.org/) installed and on the path.
