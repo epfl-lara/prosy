@@ -15,15 +15,16 @@ How to use the artifact
 Prerequisites
 -------------
 
-* Have git
-* Have SBT installed and on the path.
+* Have git installed and on the path.
+* Have java 7 or 8
+* Have [SBT](http://www.scala-sbt.org/) installed and on the path.
 * Clone the following directory using git:
 
-    git clone https://github.com/epfl-lara/prosy
+    `git clone https://github.com/epfl-lara/prosy`
   
 * Test your installation by doing
 
-    sbt compile
+    `sbt compile`
 
 It should work fine.
 
@@ -44,7 +45,7 @@ This walkthrough intentionnally comports some errors which can be recovered.
 Questions are represented before the question mark, and answers follow after the space following the question mark. No space is added *after* an answer, but in one case before - see WARNING.
 We comment some of the lines using `#`. Do not write these comments in the tool, nor the spaces before them.
 
-```python
+```bash
 a ? a      # The letter a is printed as-it.
 b ? b      # Same for letter b
 NilChar ?        # Press Enter, nothing to display if there is no char.
@@ -94,7 +95,7 @@ Run the command:
 
 The walkthrough is the following
 
-```python
+```bash
 Nil ?   # No children, just press enter
 NilA ?  # No attribute, just press enter
 Span(NilA,Nil) ? <span></span>   # If you want something flat, you would \ and press enter before entering the closing </span> tag. See below for div.
