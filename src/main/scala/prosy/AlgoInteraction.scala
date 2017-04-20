@@ -250,7 +250,7 @@ $testSetSize elements computed in test set:
   $automaticallyInferred elements automatically inferred
   $questions questions asked.
     ${questions - implicitSuggestions - explicitSuggestions} regular questions
-    $implicitSuggestions with an hint of the type [...]foo[...]
+    $implicitSuggestions with a hint of the type [...]foo[...]
     $explicitSuggestions with explicit suggestions${(if(errors == 0) "" else "\n" + errors.toString + " wrong inputs corrected afterwards")}
 """)
     

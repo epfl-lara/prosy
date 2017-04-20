@@ -80,7 +80,7 @@ Statistics:
   101 elements automatically inferred
   15 questions asked.
     6 regular questions
-    6 with an hint of the type [...]foo[...]
+    6 with a hint of the type [...]foo[...]
     3 with explicit suggestions
 ```
 
@@ -126,7 +126,7 @@ Statistics:
   179 elements automatically inferred
   14 questions asked.
     5 regular questions
-    3 with an hint of the type [...]foo[...]
+    3 with a hint of the type [...]foo[...]
     6 with explicit suggestions
 ```
 
@@ -206,7 +206,7 @@ Without any errors, we obtain the statistics :
   6 elements automatically inferred
   8 questions asked.
     3 regular questions
-    3 with an hint of the type [...]foo[...]
+    3 with a hint of the type [...]foo[...]
     2 with explicit suggestions
 ```
 
@@ -244,13 +244,13 @@ Statistics:
   67 elements automatically inferred
   17 questions asked.
     8 regular questions
-    4 with an hint of the type [...]foo[...]
+    4 with a hint of the type [...]foo[...]
     5 with explicit suggestions
 ```
 
 Note that the number of question doubled from 8 to 17, whereas the number of elements that could have been ambiguous was roughly multiplied by 8 from  14 to 84.
 
-The order of questions, when there is choice, is to ask questions with the least number of solutions first.
+The order of questions, when there is a choice, is to ask questions with the least number of solutions first.
 
 
 
