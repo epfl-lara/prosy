@@ -48,14 +48,12 @@ object AlgoInteraction {
   }
 
   /** Returns the first num different substrings recognized by the automaton, as a stream */
-  def obtainRecognitions(a: Automaton, num: Int = 10, excluded: List[String] = Nil): Stream[String] = {
+  def obtainRecognitions(a: Automaton, excluded: List[String] = Nil): Stream[String] = {
     val b = a.intersection(BasicAutomata.makeStringUnion(excluded:_*).complement)
     
-    if(num == 0) Stream.empty else {
-      val s = b.getShortestExample(true)
-      if(s == null) Stream.empty else {
-        s #:: obtainRecognitions(a, num-1, s :: excluded)
-      }
+    val s = b.getShortestExample(true)
+    if(s == null) Stream.empty else {
+      s #:: obtainRecognitions(a, s :: excluded)
     }
   }
   
@@ -139,7 +137,7 @@ object AlgoInteraction {
           errors += 1
           println(s"We cannot have the transducer convert $t to $v.\nPlease enter something consistent with what you previously entered" + (allpossibilitiesautomata match {
           case Some(a) => 
-            val l = obtainRecognitions(a, 3).toList
+            val l = obtainRecognitions(a).take(3).toList
             val end = if(l.length == 3) ",..." else ""
             val quotes = if(l.take(2).exists(_.exists(_ == "'"))) {
               if(l.take(2).exists(_.exists(_ == "`"))) {
@@ -174,12 +172,12 @@ object AlgoInteraction {
         val allpossibilitiesautomata = (knownAutomaton.clone() /: childrenReprs.zipWithIndex) {
           case (automata, (repr, i)) => automata.subst(`#`(i), repr) 
         }
-        val propositions = obtainRecognitions(allpossibilitiesautomata, choices+1)
-
-        if (propositions.isEmpty) { // Should not happen.
+        val initpropositions = obtainRecognitions(allpossibilitiesautomata)
+        
+        if (initpropositions.isEmpty) {    // Should never happen.
           throw new Exception("No transducer is compatible with your outputs.")
-        } else if (propositions.tail.isEmpty) {
-          known += (t -> propositions.head)
+        } else if (initpropositions.tail.isEmpty) {  // Only one solution.
+          known += (t -> initpropositions.head)
           println("We were able to determine the output for the following tree.")
           println(t)
           println("Output: " + known(t))
@@ -187,43 +185,49 @@ object AlgoInteraction {
           true
         } else {
           questions += 1
+          explicitSuggestions += 1
           println("What should be the output for the following input tree?")
           println(t)
-          val prArray = propositions.toList.sorted.toArray
-          for (i <- 0 until Math.min(choices,prArray.length)) {
-            println((i+1) + ") " + prArray(i))
-          }
-          explicitSuggestions += 1
           
-          if (prArray.length <= choices)
-            println("Please enter a number between 1 and " + prArray.length + ", or 0 if you really want to enter your answer manually")
-          else
-            println("Please enter a number between 1 and " + Math.min(choices,prArray.length) + ", or 0 if your answer does not appear in the list")
-          
-          val line = scala.io.StdIn.readLine() 
-          try {
-            val v = line.toInt
-            
-            if (v == 0)
-              ask(Some(allpossibilitiesautomata))
-            else {
-              gatherKnowledge(prArray(v-1), Some(allpossibilitiesautomata))
+          def suggest(propositions: Stream[String]): Boolean = {
+            val prArray = propositions.take(choices + 1).toList.sorted.toArray
+            for (i <- 0 until Math.min(choices,prArray.length)) {
+              println((i+1) + ") " + prArray(i))
             }
-          } catch {
-		    case e: java.lang.ArrayIndexOutOfBoundsException =>
-			  println("Answer out of bounds.")
-              errors += 1
-              false
-            case e: java.lang.NumberFormatException =>
-              if (prArray.contains(line)) {
-                println("We understood your answer as the string \""+line+"\"")
-                gatherKnowledge(line, Some(allpossibilitiesautomata))
-              } else {
-                println("This is not a valid number or answer.")
+            if (prArray.length <= choices)
+              println("Please enter a number between 1 and " + prArray.length + ", or 0 if you really want to enter your answer manually")
+            else
+              println(s"Please enter a number between 1 and $choices, ${prArray.length} for more suggestions, or 0 to enter your answer manually")
+            
+            val line = scala.io.StdIn.readLine() 
+            try {
+              val v = line.toInt
+              
+              if (v == 0)
+                ask(Some(allpossibilitiesautomata))
+              else if(v > prArray.length && prArray.length <= choices) {
+                println(s"$v is not an index between 1 and ${prArray.length}.")
                 errors += 1
                 false
+              } else if(v > choices && prArray.length > choices) {
+                println("Enumerating following suggestions...")
+                suggest(propositions.drop(choices))
+              } else {
+                gatherKnowledge(prArray(v-1), Some(allpossibilitiesautomata))
               }
+            } catch {
+              case e: java.lang.NumberFormatException =>
+                if (prArray.contains(line)) {
+                  println("We understood your answer as the string \""+line+"\"")
+                  gatherKnowledge(line, Some(allpossibilitiesautomata))
+                } else {
+                  println("This is not a valid number or answer.")
+                  errors += 1
+                  false
+                }
+            }
           }
+          suggest(initpropositions)
         }
       } 
       else {
