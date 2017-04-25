@@ -15,7 +15,14 @@ How to use the artifact
 Prerequisites
 -------------
 
-If you downloaded the virtual machine, extract the content in `~/VirtualBox VMs` and then use VirtualBox to open the virtual machine. If you are downloading this repository from github :
+If you downloaded the virtual machine, 
+
+* Import the virtual machine.
+* Start the machine.  if needed, the password is `prosy`. You might need to install [VM guest additions](https://docs.oracle.com/cd/E36500_01/E36502/html/qs-guest-additions.html).
+* Open a terminal command line
+* `cd prosy` and press ENTER
+
+If you are downloading this repository from github :
 
 * Have git installed and on the path.
 * Have java 7 or 8
