@@ -62,6 +62,19 @@ object Notations {
         else root + children.map(_.toString).mkString("(",",",")")
       }
     }
+    
+    def toProgramString(): String = {
+      root match {
+      case StringA => "\""+StringAvalue+"\""
+      case StringB => "\""+StringBvalue+"\""
+      case Int0 => Int0value
+      case Int1 => Int1value
+      case BooleanTrue => BooleanTruevalue
+      case BooleanFalse => BooleanFalsevalue
+      case _ => 
+        root + children.map(_.toProgramString).mkString("(",",",")")
+      }
+    }
   }
 
 

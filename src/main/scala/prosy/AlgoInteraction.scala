@@ -78,7 +78,7 @@ object AlgoInteraction {
     loop("")
   }
 
-  def learning[T](d: Domain[T], choices: Int): Option[STW[Char]] = {
+  def learning[T](d: Domain[T], choices: Int): (Option[STW[Char]], String) = {
     println("Proactive Synthesis.")
     
     println("If you ever want to enter a new line, terminate your line by \\ and press Enter.")
@@ -113,7 +113,8 @@ object AlgoInteraction {
     var explicitSuggestions = 0
     var questions = 0
     var errors = 0
-    
+    val finalQuestions = collection.mutable.ListBuffer[(Tree, String)]()
+
     def sortCriterion(x: Tree): Int = {
       /*( if (x.children.exists(c => known.get(c) == Some(""))) {
         1000
@@ -149,6 +150,7 @@ object AlgoInteraction {
           false
         } else {
           knownAutomata += f -> newAutomaton
+          finalQuestions += (t -> v)
           known += (t -> v)
           true
         }
@@ -253,8 +255,12 @@ $testSetSize elements computed in test set:
     $implicitSuggestions with a hint of the type [...]foo[...]
     $explicitSuggestions with explicit suggestions${(if(errors == 0) "" else "\n" + errors.toString + " wrong inputs corrected afterwards")}
 """)
+   val q = "\""
+    val tests_string = finalQuestions.toList.map{
+      case (tree, str) => s"case ${tree.toProgramString} => $q${str.replaceAllLiterally("\\", "\\\\").replaceAllLiterally("\n", "\\n").replaceAllLiterally("\"", "\\\"")}$q"
+    }.mkString(" ensuring { (res: string) => res == (t match {\n  ", "\n  ","\n  case _ => res})\n}")
     
-    STW(knownAutomata)
+    (STW(knownAutomata), tests_string)
   }
 
 }

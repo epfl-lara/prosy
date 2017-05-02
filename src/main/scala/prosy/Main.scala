@@ -32,8 +32,9 @@ object Main {
     val domain = ParseScala(content)
     
     AlgoInteraction.learning(domain,choices) match {
-      case None => println("No transducer can produce the provided outputs")
-      case Some(t) => println(t)
+      case (None, _) => println("No transducer can produce the provided outputs")
+      case (Some(t), tests) => print(t)
+        println(tests)
     }
   }
 
