@@ -37,10 +37,19 @@ Prerequisites
 
 It should work fine.
 
+Alternatively, if you don't have sbt installed and the file `Prosy.jar` already exists in the repository,
+you may just replace any command in the following walkthrough from:
+
+    sbt "run X"
+
+to
+
+    java -jar prosy.jar X
+
 Walkthrough Grammar
 -------------------
 
-We will show how to build a printer for a representation of a Context-Free grammar, the example of the paper, with some variations.
+We will show how to build a printer for a representation of a Context-Free grammar, the example of the paper, with some variations. Note that due to variations, the statistics may not be the same as in the paper.
 The file for which we are going to create a pretty-printer is located at: `src/main/scala/example/sample-paper.scala`.  
 We will use a two-letter (a, b) alphabet, which will be used both for the terminal characters and for indexing the non-terminals.
 Rules will be prefixed by a newline, symbols at the right-hand-side of a rule will be prefixed by a space.
